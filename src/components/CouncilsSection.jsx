@@ -6,6 +6,10 @@ export const CouncilsSection = ({ councils }) => {
   // Show only the first 5 councils, or adjust as needed
   const visibleCouncils = councils.slice(0, 5);
 
+  const handleMoreClick = () => {
+    window.location.href = '/councils';
+  };
+
   return (
     <section id="councils" className="py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -36,12 +40,13 @@ export const CouncilsSection = ({ councils }) => {
           ))}
           {/* + More Card */}
           <div
-            className="flex flex-col items-center justify-center bg-white border-2 border-dashed border-gray-300 rounded-xl p-6 transition-colors duration-200 hover:bg-gray-50 cursor-pointer min-h-[180px]"
+            onClick={handleMoreClick}
+            className="flex flex-col items-center justify-center bg-white border-2 border-dashed border-gray-300 rounded-xl p-6 transition-colors duration-200 hover:bg-gray-50 cursor-pointer min-h-[180px] hover:border-green-500 group"
           >
-            <div className="flex items-center justify-center w-12 h-12 rounded-full bg-gray-100 mb-4">
-              <Plus className="w-8 h-8 text-gray-400" />
+            <div className="flex items-center justify-center w-12 h-12 rounded-full bg-gray-100 mb-4 group-hover:bg-green-50">
+              <Plus className="w-8 h-8 text-gray-400 group-hover:text-green-500" />
             </div>
-            <span className="text-lg font-semibold text-gray-500">More Councils</span>
+            <span className="text-lg font-semibold text-gray-500 group-hover:text-green-600">More Councils</span>
           </div>
         </div>
       </div>

@@ -7,36 +7,42 @@ export function Stats() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
           <div>
-            <CountUp
-              from={0}
-              to={500}
-              separator="+"
-              direction="up"
-              duration={2}
-              className="text-7xl font-bold text-blue-700"
-            />
+            <div className="flex items-center justify-center">
+              <CountUp
+                from={0}
+                to={1000}
+                direction="up"
+                duration={2}
+                className="text-7xl font-bold text-green-700"
+              />
+              <span className="text-7xl font-bold text-green-700">+</span>
+            </div>
             <div className="mt-2 text-gray-600">Members</div>
           </div>
           <div>
-            <CountUp
-              from={0}
-              to={30}
-              separator="+"
-              direction="up"
-              duration={2}
-              className="text-7xl font-bold text-blue-700"
-            />
+            <div className="flex items-center justify-center">
+              <CountUp
+                from={0}
+                to={30}
+                direction="up"
+                duration={2}
+                className="text-7xl font-bold text-green-700"
+              />
+              <span className="text-7xl font-bold text-green-700">+</span>
+            </div>
             <div className="mt-2 text-gray-600">Events Conducted</div>
           </div>
           <div>
-            <CountUp
-              from={0}
-              to={10}
-              separator="+"
-              direction="up"
-              duration={2}
-              className="text-7xl font-bold text-blue-700"
-            />
+            <div className="flex items-center justify-center">
+              <CountUp
+                from={0}
+                to={10}
+                direction="up"
+                duration={2}
+                className="text-7xl font-bold text-green-700"
+              />
+              <span className="text-7xl font-bold text-green-700">+</span>
+            </div>
             <div className="mt-2 text-gray-600">Awards Won</div>
           </div>
         </div>

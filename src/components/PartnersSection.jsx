@@ -10,9 +10,9 @@ export const PartnersSection = () => {
   ];
 
   return (
-    <section className="py-20 bg-gray-50">
+    <section className=" ">
       <div className="w-full">
-        <div className="text-center mb-16">
+        <div className="text-center mb-8">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Partners</h2>
           <p className="text-xl text-gray-600">
             Collaborating with industry leaders and academic institutions
