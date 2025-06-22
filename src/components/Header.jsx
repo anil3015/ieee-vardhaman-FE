@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronDown, Bell } from 'lucide-react';
+import { ChevronDown, Bell, Menu, X, ChevronRight } from 'lucide-react';
 import { notifications } from '../data/notifications';
 
 export function Header({ navigationItems }) {
   const [notificationsOpen, setNotificationsOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [openDropdowns, setOpenDropdowns] = useState({});
   const unreadCount = notifications.filter(n => n.unread).length;
 
   useEffect(() => {
@@ -12,11 +14,54 @@ export function Header({ navigationItems }) {
       if (!target.closest('.notifications-container')) {
         setNotificationsOpen(false);
       }
+      if (!target.closest('.mobile-menu-container') && !target.closest('.mobile-menu-panel')) {
+        setMobileMenuOpen(false);
+        setOpenDropdowns({});
+      }
     };
 
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
+
+  // Close mobile menu when screen size changes
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1280) {
+        setMobileMenuOpen(false);
+        setOpenDropdowns({});
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const handleNavigationClick = (item, index) => {
+    if (item.dropdown) {
+      // If item has dropdown, just toggle the dropdown
+      toggleDropdown(index);
+    } else {
+      // If item doesn't have dropdown, execute action and close menu
+      item.action();
+      setMobileMenuOpen(false);
+      setOpenDropdowns({});
+    }
+  };
+
+  const handleDropdownItemClick = (action) => {
+    // Execute the action and close everything
+    action();
+    setMobileMenuOpen(false);
+    setOpenDropdowns({});
+  };
+
+  const toggleDropdown = (index) => {
+    setOpenDropdowns(prev => ({
+      ...prev,
+      [index]: !prev[index]
+    }));
+  };
 
   const getNotificationIcon = (type) => {
     switch (type) {
@@ -34,22 +79,25 @@ export function Header({ navigationItems }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 w-full">
           {/* Left: Logo & Title */}
-          <div className="flex items-center space-x-4 flex-shrink-0">
+          <div className="flex items-center space-x-3 flex-shrink-0">
             <img
-              className="h-12 w-auto"
+              className="h-10 w-auto sm:h-12"
               src="https://res.cloudinary.com/doyh3fqr5/image/upload/c_crop,w_1000,h_780/v1750524389/IEEE_VCE_SB_-_TBG_j8tonl.png"
               alt="IEEE VCE SB Logo"
             />
-            <h1 className="text-xl font-bold text-gray-900 whitespace-nowrap">IEEE Vardhaman</h1>
+            <div className="flex flex-col">
+              <h1 className="text-base sm:text-xl font-bold text-gray-900 leading-tight">IEEE Vardhaman</h1>
+              <span className="text-xs sm:text-sm text-gray-600 leading-tight">Student Branch</span>
+            </div>
           </div>
 
           {/* Spacer to push navigation to the right */}
           <div className="flex-grow"></div>
 
-          {/* Right: Nav + Notifications */}
-          <div className="flex items-center space-x-6 flex-shrink-0">
-            {/* Navigation */}
-            <nav className="hidden md:flex space-x-1">
+          {/* Right: Nav + Notifications + Mobile Menu */}
+          <div className="flex items-center space-x-2 sm:space-x-4 flex-shrink-0">
+            {/* Desktop Navigation - Only show on extra large screens */}
+            <nav className="hidden xl:flex space-x-1">
               {navigationItems.map((item, index) => (
                 <div key={index} className="relative group">
                   <button
@@ -75,21 +123,22 @@ export function Header({ navigationItems }) {
                 </div>
               ))}
             </nav>
+
             {/* Notifications */}
             <div className="relative notifications-container">
               <button
                 onClick={() => setNotificationsOpen(!notificationsOpen)}
                 className="relative p-2 text-gray-700 hover:text-blue-900 hover:bg-gray-50 rounded-md transition-colors duration-200"
               >
-                <Bell className="w-6 h-6" />
+                <Bell className="w-5 h-5 sm:w-6 sm:h-6" />
                 {unreadCount > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-semibold">
+                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center font-semibold">
                     {unreadCount > 9 ? '9+' : unreadCount}
                   </span>
                 )}
               </button>
               {notificationsOpen && (
-                <div className="absolute top-full right-0 mt-2 w-80 bg-white rounded-lg shadow-xl border border-gray-200 py-2 max-h-96 overflow-y-auto z-50">
+                <div className="absolute top-full right-0 mt-2 w-72 sm:w-80 bg-white rounded-lg shadow-xl border border-gray-200 py-2 max-h-96 overflow-y-auto z-50">
                   <div className="px-4 py-3 border-b border-gray-100">
                     <div className="flex items-center justify-between">
                       <h3 className="text-lg font-semibold text-gray-900">Notifications</h3>
@@ -150,9 +199,97 @@ export function Header({ navigationItems }) {
                 </div>
               )}
             </div>
+
+            {/* Mobile/Tablet/Laptop Menu Button - Show on screens smaller than xl */}
+            <div className="mobile-menu-container xl:hidden">
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="p-2 text-gray-700 hover:text-green-700 hover:bg-green-50 rounded-md transition-colors duration-200"
+                aria-label="Toggle menu"
+              >
+                {mobileMenuOpen ? (
+                  <X className="w-6 h-6" />
+                ) : (
+                  <Menu className="w-6 h-6" />
+                )}
+              </button>
+            </div>
           </div>
         </div>
       </div>
+
+      {/* Floating Mobile/Tablet/Laptop Menu Panel */}
+      {mobileMenuOpen && (
+        <div className="xl:hidden fixed top-16 left-0 right-0 bottom-0 bg-black bg-opacity-50 z-40">
+          <div className="mobile-menu-panel absolute top-0 right-0 w-80 h-full bg-white shadow-2xl transform transition-transform duration-300 ease-in-out">
+            <div className="flex flex-col h-full">
+              {/* Menu Header */}
+              <div className="px-6 py-6 bg-gradient-to-br from-green-600 to-green-700 text-white">
+                <div className="flex items-center space-x-3 mb-2">
+                  <div>
+                    <h2 className="text-xl font-bold">IEEE Vardhaman</h2>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Scrollable Menu Content */}
+              <div className="flex-1 overflow-y-auto bg-gray-50">
+                <nav className="py-4">
+                  {navigationItems.map((item, index) => (
+                    <div key={index} className="mb-1">
+                      <button
+                        onClick={() => handleNavigationClick(item, index)}
+                        className={`w-full text-left px-6 py-4 text-gray-700 hover:text-green-700 hover:bg-green-50 transition-all duration-200 flex items-center justify-between group ${
+                          openDropdowns[index] ? 'bg-green-50 text-green-700' : ''
+                        }`}
+                      >
+                        <span className={`font-medium ${
+                          openDropdowns[index] ? 'text-green-700' : 'text-gray-800'
+                        } group-hover:text-green-700`}>
+                          {item.name}
+                        </span>
+                        {item.dropdown && (
+                          <ChevronRight 
+                            className={`w-4 h-4 transition-transform duration-200 ${
+                              openDropdowns[index] ? 'rotate-90 text-green-600' : 'text-gray-400'
+                            }`} 
+                          />
+                        )}
+                      </button>
+                      {item.dropdown && openDropdowns[index] && (
+                        <div className="bg-white border-l-4 border-green-500 ml-6 mr-2 rounded-r-lg shadow-sm">
+                          {item.dropdown.map((dropdownItem, dropdownIndex) => (
+                            <button
+                              key={dropdownIndex}
+                              onClick={() => handleDropdownItemClick(dropdownItem.action)}
+                              className="block w-full text-left px-6 py-3 text-sm text-gray-600 hover:text-green-700 hover:bg-green-50 transition-colors duration-200 border-b border-gray-100 last:border-b-0"
+                            >
+                              {dropdownItem.name}
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </nav>
+              </div>
+              
+              {/* Menu Footer */}
+              <div className="px-6 py-4 bg-white border-t border-gray-200">
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    setOpenDropdowns({});
+                  }}
+                  className="w-full px-4 py-3 text-sm text-gray-600 hover:text-green-700 hover:bg-green-50 rounded-lg transition-colors duration-200 font-medium"
+                >
+                  Close Menu
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </header>
   );
 }

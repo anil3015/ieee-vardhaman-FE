@@ -1,11 +1,67 @@
-import React from 'react';
-import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, ArrowUpRight } from 'lucide-react';
+import React, { useState } from 'react';
+import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, ArrowUpRight, Loader2, AlertCircle } from 'lucide-react';
+import toast, { Toaster } from 'react-hot-toast';
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 export const Footer = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [email, setEmail] = useState('');
+  const [error, setError] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setError('');
+    
+    try {
+      const response = await fetch(`${BACKEND_URL}/newsletter/subscribe`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to subscribe');
+      }
+
+      toast.success('Successfully subscribed to newsletter!', {
+        duration: 3000,
+        position: 'top-center',
+        style: {
+          background: '#10B981',
+          color: '#fff',
+          borderRadius: '9999px',
+        },
+        icon: '📧',
+      });
+      setEmail('');
+    } catch (error) {
+      setError(error.message || 'Failed to subscribe. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const marqueeContent = (
+    <div className="flex flex-shrink-0 items-center justify-around">
+      <p className="px-8 text-3xl font-semibold text-gray-300">IEEE VMEG</p>
+      <div className="flex h-[60px] w-[60px] items-center justify-center rounded-full bg-green-500">
+        <ArrowUpRight className="h-7 w-7 text-white" />
+      </div>
+    </div>
+  );
+
   return (
-    <div className="pt-24 sm:pt-32">
+    <div>
+      <Toaster />
       <div className="relative w-full">
-        <div className="rounded-3xl bg-white p-8 shadow-xl sm:p-10 lg:p-16">
+        {/* main container with more dramatic curve and enhanced green shadow */}
+        <div className="rounded-t-3xl rounded-b-[200px] bg-white p-8 sm:p-10 lg:p-16 relative shadow-2xl shadow-green-200/90">
           <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-5">
             {/* Column 1: Branding and Newsletter */}
             <div className="lg:col-span-2">
@@ -19,43 +75,61 @@ export const Footer = () => {
               </div>
               
               <p className="text-base font-semibold leading-7 text-gray-900">Subscribe to our newsletter</p>
-              <form className="mt-2 flex max-w-md gap-x-4 rounded-full border border-gray-300 p-1.5 pl-4">
-                <input
-                  type="email"
-                  required
-                  placeholder="Enter your email"
-                  className="min-w-0 flex-auto appearance-none border-0 bg-transparent p-0 text-base leading-7 text-gray-900 placeholder:text-gray-400 focus:ring-0"
-                />
-                <button
-                  type="submit"
-                  className="flex-none rounded-full bg-green-500 px-3.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-green-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-500"
-                >
-                  Sign up
-                </button>
+              <form onSubmit={handleSubmit} className="mt-2 flex flex-col gap-y-2">
+                <div className="flex gap-x-4 rounded-full border border-gray-300 p-1.5 pl-4 bg-white">
+                  <input
+                    type="email"
+                    required
+                    value={email}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                      setError(''); // Clear error when user types
+                    }}
+                    placeholder="Enter your email"
+                    className="min-w-0 flex-auto appearance-none border-0 bg-white p-0 text-base leading-7 text-gray-900 placeholder:text-gray-400 focus:ring-0"
+                  />
+                  <button
+                    type="submit"
+                    disabled={isLoading}
+                    className={`flex-none rounded-full bg-green-500 px-3.5 py-1.5 text-sm font-semibold text-white shadow-sm transition-all duration-200 ${
+                      isLoading ? 'opacity-80 cursor-not-allowed' : 'hover:bg-green-600'
+                    } focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-500 min-w-[80px] flex items-center justify-center`}
+                  >
+                    {isLoading ? (
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                    ) : (
+                      'Sign up'
+                    )}
+                  </button>
+                </div>
+                {error && (
+                  <div className="flex items-center gap-x-2 text-red-500 text-sm pl-2">
+                    <AlertCircle className="h-4 w-4" />
+                    <span>{error}</span>
+                  </div>
+                )}
               </form>
             </div>
 
-            {/* Column 2: Company */}
+            {/* Column 2: Quick Links */}
             <div className="mt-2">
-              <h4 className="font-semibold text-gray-900">Company</h4>
+              <h4 className="font-semibold text-gray-900">Quick Links</h4>
               <ul className="mt-4 space-y-2 text-sm text-gray-500">
-                <li><a href="#" className="hover:text-gray-900">About Us</a></li>
-                <li><a href="#" className="hover:text-gray-900">Membership</a></li>
-                <li><a href="#" className="hover:text-gray-900">Events</a></li>
-                <li><a href="#" className="hover:text-gray-900">Publications</a></li>
-                <li><a href="#" className="hover:text-gray-900">Legal & Privacy</a></li>
+                <li><a href="/upcoming-events" className="hover:text-gray-900">Upcoming Events</a></li>
+                <li><a href="/societies" className="hover:text-gray-900">Societies</a></li>
+                <li><a href="/councils" className="hover:text-gray-900">Councils</a></li>
+                <li><a href="/team" className="hover:text-gray-900">Developer Team</a></li>
+                <li><a href="/newsletters" className="hover:text-gray-900">Newsletters</a></li>
               </ul>
             </div>
 
-            {/* Column 3: Individuals */}
+            {/* Column 3: Media */}
             <div className="mt-2">
-              <h4 className="font-semibold text-gray-900">Individuals</h4>
+              <h4 className="font-semibold text-gray-900">Media</h4>
               <ul className="mt-4 space-y-2 text-sm text-gray-500">
-                <li><a href="#" className="hover:text-gray-900">Societies</a></li>
-                <li><a href="#" className="hover:text-gray-900">Councils</a></li>
-                <li><a href="#" className="hover:text-gray-900">Create Account</a></li>
-                <li><a href="#" className="hover:text-gray-900">Get Involved</a></li>
-                <li><a href="#" className="hover:text-gray-900">Contact Us</a></li>
+                <li><a href="/gallery" className="hover:text-gray-900">Gallery</a></li>
+                <li><a href="/journey" className="hover:text-gray-900">Journey</a></li>
+                <li><a href="/achievements" className="hover:text-gray-900">Achievements</a></li>
               </ul>
             </div>
 
@@ -78,19 +152,21 @@ export const Footer = () => {
               </ul>
             </div>
           </div>
-
-          
         </div>
 
         {/* "Let's Talk" Marquee */}
-        <div className="relative mt-4 h-20 w-full overflow-hidden mb-8">
-          <div className="absolute left-0 flex animate-marquee-infinite">
-            {[...Array(5)].map((_, i) => (
-              <div key={i} className="flex flex-shrink-0 items-center justify-around">
-                <p className="px-8 text-7xl font-semibold text-gray-300">IEEE VMEG</p>
-                <div className="flex h-[60px] w-[60px] items-center justify-center rounded-full bg-green-500">
-                  <ArrowUpRight className="h-7 w-7 text-white" />
-                </div>
+        <div className="relative mt-12 h-[60px] w-full overflow-hidden mb-1">
+          <div className="flex absolute left-0 animate-marquee whitespace-nowrap">
+            {[...Array(10)].map((_, i) => (
+              <div key={i} className="flex flex-shrink-0">
+                {marqueeContent}
+              </div>
+            ))}
+          </div>
+          <div className="flex absolute left-0 animate-marquee2 whitespace-nowrap">
+            {[...Array(10)].map((_, i) => (
+              <div key={i} className="flex flex-shrink-0">
+                {marqueeContent}
               </div>
             ))}
           </div>

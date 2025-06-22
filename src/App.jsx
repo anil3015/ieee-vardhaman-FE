@@ -9,6 +9,8 @@ import { EventsSection } from './components/EventsSection';
 import { AchievementsSection } from './components/AchievementsSection';
 import { PartnersSection } from './components/PartnersSection';
 import { GallerySection } from './components/GallerySection';
+import { FAQsSection } from './components/FAQsSection';
+import { ContactUs } from './components/ContactUs';
 import { Footer } from './components/Footer';
 import { slides, societies, councils, pastEvents, upcomingEvents, achievements } from './data/content';
 
@@ -37,8 +39,8 @@ function App() {
       name: 'Events', 
       action: () => scrollToSection('events'),
       dropdown: [
-        { name: 'Past Events', action: () => scrollToSection('past-events') },
-        { name: 'Upcoming Events', action: () => scrollToSection('upcoming-events') }
+        { name: 'Past Events', action: () => window.location.href = '/past-events' },
+        { name: 'Upcoming Events', action: () => window.location.href = '/upcoming-events' }
       ]
     },
     { 
@@ -47,6 +49,8 @@ function App() {
       dropdown: achievements.map(a => ({ name: a.title, action: () => scrollToSection('achievements') }))
     },
     { name: 'Gallery', action: () => scrollToSection('gallery') },
+    { name: 'FAQs', action: () => scrollToSection('faqs') },
+    { name: 'Contact', action: () => scrollToSection('contact') },
     { name: 'Journey', action: () => window.location.href = '/journey' },
     { name: 'Newsletters', action: () => window.location.href = '/newsletters' }
   ];
@@ -63,6 +67,8 @@ function App() {
       <AchievementsSection achievements={achievements} />
       <PartnersSection />
       <GallerySection />
+      <FAQsSection />
+      <ContactUs />
       <Footer />
     </div>
   );

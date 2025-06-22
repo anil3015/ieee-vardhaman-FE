@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import CardSwap, { Card } from './reactcom/CardSwap';
+import { ArrowRight } from 'lucide-react';
 
 export const AchievementsSection = ({ achievements }) => {
   const [currentFrontIndex, setCurrentFrontIndex] = useState(0);
@@ -10,6 +10,10 @@ export const AchievementsSection = ({ achievements }) => {
     }
   }, [achievements]);
 
+  const handleMoreClick = () => {
+    window.location.href = '/achievements';
+  };
+
   return (
     <section id="achievements" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -19,48 +23,63 @@ export const AchievementsSection = ({ achievements }) => {
             Recognition and awards that reflect our commitment to excellence
           </p>
         </div>
-        <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-8">
-          {/* Left section for the achievement image */}
-          <div className="lg:w-1/2 flex items-center justify-center p-8">
-            <img
-              src={achievements[currentFrontIndex]?.image || ""}
-              alt="Current Achievement Icon"
-              className="w-full h-auto object-contain"
-            />
+
+        <div className="flex flex-col lg:flex-row items-center justify-between max-w-6xl mx-auto gap-8 lg:gap-12">
+          {/* Main Achievement Display - Left Side */}
+          <div className="w-full lg:w-1/2">
+            <div className="aspect-square relative rounded-xl overflow-hidden">
+              <img
+                src={achievements[currentFrontIndex]?.image || ""}
+                alt={achievements[currentFrontIndex]?.title || "Achievement"}
+                className="w-full h-full object-contain"
+              />
+            </div>
           </div>
-          {/* Right section for CardSwap */}
-          <div style={{ height: '450px', position: 'relative' }} className="lg:w-1/2 flex justify-center">
-            <CardSwap
-              cardDistance={60}
-              verticalDistance={70}
-              delay={5000}
-              pauseOnHover={false}
-              onFrontCardChange={setCurrentFrontIndex}
-            >
+
+          {/* Right Side Content */}
+          <div className="w-full lg:w-1/2 flex flex-col items-center justify-between space-y-6">
+            {/* Achievement Details */}
+            <div className="text-center lg:text-left">
+              <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                {achievements[currentFrontIndex]?.title}
+              </h3>
+              <p className="text-gray-600 mb-1">{achievements[currentFrontIndex]?.year}</p>
+              <p className="text-gray-700">{achievements[currentFrontIndex]?.description}</p>
+            </div>
+
+            {/* Thumbnail Carousel */}
+            <div className="flex flex-wrap items-center justify-center gap-4 w-full py-2">
               {achievements.map((achievement, index) => (
-                <Card key={index}>
-                  <div className="relative flex flex-col items-center justify-center h-full w-full text-center bg-gradient-to-br from-blue-50 to-white rounded-2xl p-6">
-                    {/* Envelope flap lines */}
-                    <div className="absolute left-0 top-0 w-full h-24 pointer-events-none">
-                      <svg
-                        className="absolute inset-0"
-                        width="100%"
-                        height="100%"
-                        viewBox="0 0 100 100"
-                        preserveAspectRatio="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <line x1="0" y1="0" x2="50" y2="100" stroke="#d1d5db" strokeWidth="1.5" />
-                        <line x1="100" y1="0" x2="50" y2="100" stroke="#d1d5db" strokeWidth="1.5" />
-                      </svg>
-                    </div>
-                    <h3 className="text-2xl font-extrabold text-gray-900 mb-3 mt-4">{achievement.title}</h3>
-                    <span className="bg-blue-100 text-blue-800 px-4 py-1 rounded-full text-base font-semibold mb-3 inline-block">{achievement.year}</span>
-                    <p className="text-gray-700 text-lg">{achievement.description}</p>
-                  </div>
-                </Card>
+                <button
+                  key={achievement.title}
+                  onClick={() => setCurrentFrontIndex(index)}
+                  className={`relative flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden transition-all duration-200 
+                    ${currentFrontIndex === index 
+                      ? 'ring-2 ring-green-500 ring-offset-2' 
+                      : 'ring-1 ring-gray-200 opacity-70 hover:opacity-100'}`}
+                >
+                  <img
+                    src={achievement.image}
+                    alt={achievement.title}
+                    className="w-full h-full object-cover"
+                  />
+                </button>
               ))}
-            </CardSwap>
+            </div>
+
+            {/* Show More Button */}
+            <div className="text-center">
+              <button
+                onClick={handleMoreClick}
+                className="group relative inline-flex items-center px-8 py-3 text-base font-medium border-2 border-black rounded-full overflow-hidden transition-all duration-300 hover:border-transparent"
+              >
+                <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform translate-x-full group-hover:translate-x-0 bg-green-500"></span>
+                <span className="relative flex items-center justify-center transition-colors duration-300 group-hover:text-white">
+                  Show More Achievements
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </span>
+              </button>
+            </div>
           </div>
         </div>
       </div>

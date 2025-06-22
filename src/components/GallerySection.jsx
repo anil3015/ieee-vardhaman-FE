@@ -1,6 +1,7 @@
 import React from 'react';
 import { galleryItems } from '../data/content';
 import Masonry from './reactcom/Masonry';
+import { ArrowRight } from 'lucide-react';
 
 export const GallerySection = () => {
   return (
@@ -35,6 +36,20 @@ export const GallerySection = () => {
 
           {/* Bottom Light Dim Overlay */}
           <div className="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-gray-100 to-transparent z-10 pointer-events-none" />
+        </div>
+
+        {/* View Gallery Button */}
+        <div className="mt-12 text-center">
+          <button
+            onClick={() => window.location.href = '/gallery'}
+            className="group relative inline-flex items-center px-8 py-3 text-base font-medium border-2 border-black rounded-full overflow-hidden transition-all duration-300 hover:border-transparent"
+          >
+            <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform translate-x-full group-hover:translate-x-0 bg-green-500"></span>
+            <span className="relative flex items-center justify-center transition-colors duration-300 group-hover:text-white">
+              View Gallery
+              <ArrowRight className="ml-2 w-5 h-5" />
+            </span>
+          </button>
         </div>
       </div>
     </section>
