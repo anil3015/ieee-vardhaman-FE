@@ -14,7 +14,7 @@ export const SocietiesSection = ({ societies }) => {
     <section id="societies" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">IEEE Societies</h2>
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">I Societies</h2>
           <p className="text-xl text-gray-600">
             Specialized technical communities driving innovation in their respective fields
           </p>
