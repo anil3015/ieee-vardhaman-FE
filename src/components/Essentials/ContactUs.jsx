@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Send, Loader2, AlertCircle } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
+import { collection, addDoc } from 'firebase/firestore';
+import { db } from '../../firebaseConfig';
+
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
@@ -26,22 +29,15 @@ export const ContactUs = () => {
     e.preventDefault();
     setIsLoading(true);
     setError('');
-    
+  
     try {
-      const response = await fetch(`${BACKEND_URL}/contact`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
+      await addDoc(collection(db, 'contactRequests'), {
+        name: formData.name,
+        email: formData.email,
+        message: formData.message,
+        timestamp: new Date()
       });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || 'Failed to send message');
-      }
-
+  
       toast.success('Message sent successfully!', {
         duration: 3000,
         position: 'top-center',
@@ -52,19 +48,15 @@ export const ContactUs = () => {
         },
         icon: '✉️',
       });
-
-      // Clear form after successful submission
-      setFormData({
-        name: '',
-        email: '',
-        message: ''
-      });
+  
+      setFormData({ name: '', email: '', message: '' });
     } catch (error) {
-      setError(error.message || 'Failed to send message. Please try again.');
+      setError('Failed to send message. Please try again.');
     } finally {
       setIsLoading(false);
     }
   };
+  
 
   return (
     <section id="contact" className="pb-16">
