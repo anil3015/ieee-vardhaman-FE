@@ -1,26 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { Calendar, Users, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
-import Carousel from './Carousel';
+import EmblaCarousel from './EmblaCarousel'; // <-- changed from InfiniteCarousel
 
 export const EventsSection = ({ pastEvents, upcomingEvents }) => {
   const [itemsPerPage, setItemsPerPage] = useState(3);
 
-  // Update items per page based on screen size
   useEffect(() => {
     const updateItemsPerPage = () => {
       if (window.innerWidth < 640) {
-        setItemsPerPage(1); // Mobile: 1 card
+        setItemsPerPage(1);
       } else if (window.innerWidth < 1024) {
-        setItemsPerPage(2); // Tablet: 2 cards
+        setItemsPerPage(2);
       } else {
-        setItemsPerPage(3); // Desktop: 3 cards
+        setItemsPerPage(3);
       }
     };
 
     updateItemsPerPage();
     window.addEventListener('resize', updateItemsPerPage);
     return () => window.removeEventListener('resize', updateItemsPerPage);
-  }, []);
+  }, []); 
 
   const CarouselNavButton = ({ direction, onClick, className }) => (
     <button
@@ -38,21 +37,21 @@ export const EventsSection = ({ pastEvents, upcomingEvents }) => {
   );
 
   const EventCard = ({ event, isUpcoming = false }) => (
-    <div className="bg-white rounded-xl overflow-hidden border border-gray-300 transition-colors duration-300 group flex flex-col hover:bg-gray-50 mx-2 my-2 sm:my-0">
+    <div className="bg-white rounded-xl overflow-hidden border border-gray-300 transition-colors duration-300 group flex flex-col hover:bg-gray-50 mx-2 my-2 sm:my-0 w-full min-w-[260px] max-w-[350px]">
       <div className="relative overflow-hidden">
         <img
           src={event.image}
           alt={event.title}
-          className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
+          className="w-full h-40 sm:h-48 md:h-56 object-cover transition-transform duration-300 group-hover:scale-105"
         />
       </div>
-      <div className="p-4 sm:p-6 flex flex-col flex-grow">
+      <div className="p-3 sm:p-4 md:p-6 flex flex-col flex-grow">
         <div>
-          <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 group-hover:text-green-600 transition-colors duration-200 line-clamp-2">
+          <h3 className="truncate text-base sm:text-lg md:text-xl font-bold text-gray-900 mb-2 group-hover:text-green-600 transition-colors duration-200">
             {event.title}
           </h3>
           {isUpcoming && (
-            <p className="text-gray-600 mb-2 text-sm sm:text-base line-clamp-1">{event.description}</p>
+            <p className="text-gray-600 mb-2 text-xs sm:text-sm md:text-base line-clamp-1">{event.description}</p>
           )}
           <div className="flex items-center justify-between text-xs sm:text-sm text-gray-600 mt-2 mb-3">
             <span className="flex items-center space-x-1">
@@ -62,8 +61,8 @@ export const EventsSection = ({ pastEvents, upcomingEvents }) => {
             <span className="flex items-center space-x-1">
               <Users className="w-4 h-4 text-gray-500" />
               <span>
-                {isUpcoming 
-                  ? `${event.registrations} Registrations` 
+                {isUpcoming
+                  ? `${event.registrations} Registrations`
                   : event.participants}
               </span>
             </span>
@@ -71,10 +70,10 @@ export const EventsSection = ({ pastEvents, upcomingEvents }) => {
           <div className="border-b border-gray-200 mb-4"></div>
           <div className="flex items-center space-x-3">
             {event.hostingBranchLogo && (
-              <img 
-                src={event.hostingBranchLogo} 
-                alt={event.hostingBranchName + ' logo'} 
-                className="h-6 w-6 sm:h-8 sm:w-8 object-contain rounded-full" 
+              <img
+                src={event.hostingBranchLogo}
+                alt={event.hostingBranchName + ' logo'}
+                className="h-6 w-6 sm:h-8 sm:w-8 object-contain rounded-full"
               />
             )}
             {event.hostingBranchName && (
@@ -84,7 +83,7 @@ export const EventsSection = ({ pastEvents, upcomingEvents }) => {
         </div>
         {isUpcoming && (
           <div className="flex justify-center mt-4 pt-2 sm:mt-6">
-            <button className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-4 sm:px-6 py-2 rounded-lg font-semibold transition-colors duration-200 text-sm sm:text-base">
+            <button className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-4 sm:px-6 py-2 rounded-lg font-semibold transition-colors duration-200 text-xs sm:text-sm md:text-base">
               Register Now
             </button>
           </div>
@@ -96,7 +95,7 @@ export const EventsSection = ({ pastEvents, upcomingEvents }) => {
   return (
     <section id="events" className="">
       {/* Past Events */}
-      <section id="past-events" className="py-12 sm:py-16 lg:py-20">
+      <section id="past-events" className="py-8 sm:py-16 lg:py-20">
         <div className="max-full mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 sm:mb-12 lg:mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">Past Events</h2>
@@ -106,21 +105,10 @@ export const EventsSection = ({ pastEvents, upcomingEvents }) => {
           </div>
 
           <div className="relative px-12">
-            <Carousel 
-              itemsPerPage={itemsPerPage} 
-              infiniteLoop={true} 
-              autoPlay={true}
-              renderNavigation={({ onPrevClick, onNextClick }) => (
-                <>
-                  <CarouselNavButton direction="left" onClick={onPrevClick} />
-                  <CarouselNavButton direction="right" onClick={onNextClick} />
-                </>
-              )}
-            >
-              {pastEvents.map((event, index) => (
-                <EventCard key={index} event={event} />
-              ))}
-            </Carousel>
+            <EmblaCarousel
+              items={pastEvents}
+              renderItem={(event) => <EventCard event={event} />}
+            />
           </div>
 
           <div className="mt-12 text-center">
@@ -139,7 +127,7 @@ export const EventsSection = ({ pastEvents, upcomingEvents }) => {
       </section>
 
       {/* Upcoming Events */}
-      <section id="upcoming-events" className="py-12 sm:py-16 lg:py-20 bg-white">
+      <section id="upcoming-events" className="py-8 sm:py-16 lg:py-20 bg-white">
         <div className="max-full mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 sm:mb-12 lg:mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">Upcoming Events</h2>
@@ -149,21 +137,10 @@ export const EventsSection = ({ pastEvents, upcomingEvents }) => {
           </div>
 
           <div className="relative px-12">
-            <Carousel 
-              itemsPerPage={itemsPerPage} 
-              infiniteLoop={true} 
-              autoPlay={true}
-              renderNavigation={({ onPrevClick, onNextClick }) => (
-                <>
-                  <CarouselNavButton direction="left" onClick={onPrevClick} />
-                  <CarouselNavButton direction="right" onClick={onNextClick} />
-                </>
-              )}
-            >
-              {upcomingEvents.map((event, index) => (
-                <EventCard key={index} event={event} isUpcoming={true} />
-              ))}
-            </Carousel>
+            <EmblaCarousel
+              items={upcomingEvents}
+              renderItem={(event) => <EventCard event={event} isUpcoming />}
+            />
           </div>
 
           <div className="mt-12 text-center">

@@ -1,4 +1,4 @@
-import { Slide, Society, Council, PastEvent, UpcomingEvent, Achievement, GalleryItem } from '../types';
+import { Slide, Society, Council, PastEvent, UpcomingEvent, Achievement, GalleryItem } from '../../../types';
 
 export const slides: Slide[] = [
   {
@@ -61,8 +61,25 @@ export const pastEvents: PastEvent[] = [
     participants: "1000+",
     hostingBranchName: "IEEE Student Branch",
     hostingBranchLogo: "https://res.cloudinary.com/doyh3fqr5/image/upload/c_crop,w_1000,h_780/v1750524389/IEEE_VCE_SB_-_TBG_j8tonl.png"
+  },
+  {
+    title: "Hack the Future Hackathon",
+    date: "January 12, 2024",
+    image: "https://images.pexels.com/photos/8867439/pexels-photo-8867439.jpeg?auto=compress&cs=tinysrgb&w=800",
+    participants: "350+",
+    hostingBranchName: "IEEE Innovation Lab",
+    hostingBranchLogo: "https://cdn-icons-png.flaticon.com/512/3135/3135755.png"
+  },
+  {
+    title: "Quantum Computing Seminar",
+    date: "December 10, 2023",
+    image: "https://images.pexels.com/photos/256417/pexels-photo-256417.jpeg?auto=compress&cs=tinysrgb&w=800",
+    participants: "120+",
+    hostingBranchName: "IEEE Quantum SIG",
+    hostingBranchLogo: "https://cdn-icons-png.flaticon.com/512/905/905690.png"
   }
 ];
+
 
 export const upcomingEvents: UpcomingEvent[] = [
   {
@@ -91,8 +108,27 @@ export const upcomingEvents: UpcomingEvent[] = [
     registrations: "100",
     hostingBranchName: "IEEE Young Professionals",
     hostingBranchLogo: "https://cdn-icons-png.flaticon.com/512/2965/2965391.png"
+  },
+  {
+    title: "Cybersecurity Essentials",
+    date: "September 12, 2024",
+    image: "https://images.pexels.com/photos/5473951/pexels-photo-5473951.jpeg?auto=compress&cs=tinysrgb&w=800",
+    description: "Protecting digital infrastructure and networks",
+    registrations: "180",
+    hostingBranchName: "IEEE Cybersecurity SIG",
+    hostingBranchLogo: "https://cdn-icons-png.flaticon.com/512/2206/2206368.png"
+  },
+  {
+    title: "Green Tech & Sustainability Conference",
+    date: "October 20, 2024",
+    image: "https://images.pexels.com/photos/8867439/pexels-photo-8867439.jpeg?auto=compress&cs=tinysrgb&w=800",
+    description: "Innovations in clean energy and sustainable tech",
+    registrations: "220",
+    hostingBranchName: "IEEE Environmental Tech",
+    hostingBranchLogo: "https://cdn-icons-png.flaticon.com/512/4299/4299923.png"
   }
 ];
+
 
 export const achievements: Achievement[] = [
   { title: "Best Student Branch Award", year: "2024", description: "IEEE Region 10 Recognition", image: "https://res.cloudinary.com/doyh3fqr5/image/upload/v1750567600/download_aib5cd.jpg" },
@@ -191,4 +227,11 @@ export const galleryItems: GalleryItem[] = [
     url: "#",
     height: 350,
   },
+];
+
+export const heroImages = [
+  { id: 1, image: "https://res.cloudinary.com/doyh3fqr5/image/upload/v1750955104/0752c60f-dbe1-4094-98ab-0547ecc0cbd1.png" },
+  { id: 2, image: "https://res.cloudinary.com/doyh3fqr5/image/upload/v1750954876/445ef754-d812-47f1-9261-757fa11f6481.png" },
+  { id: 3, image: "https://res.cloudinary.com/doyh3fqr5/image/upload/v1750954832/ca9ae134-ccdd-42f6-8d1c-949869b5c8c2.png" },
+  
 ];

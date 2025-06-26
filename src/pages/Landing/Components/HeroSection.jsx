@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-export const HeroSection = ({ slides, onScrollToSection }) => {
+export const HeroSection = ({ heroImages, onScrollToSection }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
+      setCurrentSlide((prev) => (prev + 1) % heroImages.length);
     }, 5000);
     return () => clearInterval(timer);
-  }, [slides.length]);
+  }, [heroImages.length]);
 
   return (
     <section id="hero" className="relative h-screen overflow-hidden">
@@ -17,7 +17,7 @@ export const HeroSection = ({ slides, onScrollToSection }) => {
       <div className="absolute inset-0">
         <div
           className="w-full h-full bg-cover bg-center transition-all duration-1000 ease-in-out"
-          style={{ backgroundImage: `url(${slides[currentSlide].image})` }}
+          style={{ backgroundImage: `url(${heroImages[currentSlide].image})` }}
         >
           <div className="absolute inset-0 bg-black bg-opacity-50"></div>
         </div>
@@ -25,7 +25,7 @@ export const HeroSection = ({ slides, onScrollToSection }) => {
 
       {/* Carousel Controls */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2">
-        {slides.map((_, index) => (
+        {heroImages.map((_, index) => (
           <button
             key={index}
             onClick={() => setCurrentSlide(index)}
@@ -39,7 +39,7 @@ export const HeroSection = ({ slides, onScrollToSection }) => {
       {/* Left Arrow */}
       <button
         onClick={() =>
-          setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)
+          setCurrentSlide((prev) => (prev - 1 + heroImages.length) % heroImages.length)
         }
         className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white hover:text-gray-300 transition-colors duration-200"
       >
@@ -48,7 +48,7 @@ export const HeroSection = ({ slides, onScrollToSection }) => {
 
       {/* Right Arrow */}
       <button
-        onClick={() => setCurrentSlide((prev) => (prev + 1) % slides.length)}
+        onClick={() => setCurrentSlide((prev) => (prev + 1) % heroImages.length)}
         className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white hover:text-gray-300 transition-colors duration-200"
       >
         <ChevronRight className="w-8 h-8" />

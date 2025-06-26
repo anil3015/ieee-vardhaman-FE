@@ -1,5 +1,5 @@
 import React from 'react';
-import CountUp from './reactcom/CountUp';
+import CountUp from '../../../components/reactcom/CountUp';
 
 export function Stats() {
   return (

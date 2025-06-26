@@ -1,6 +1,6 @@
 import React from 'react';
 import { galleryItems } from '../data/content';
-import Masonry from './reactcom/Masonry';
+import Masonry from '../../../components/reactcom/Masonry';
 import { ArrowRight } from 'lucide-react';
 
 export const GallerySection = () => {

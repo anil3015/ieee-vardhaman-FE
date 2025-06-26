@@ -15,9 +15,9 @@ export const AchievementsSection = ({ achievements }) => {
   };
 
   return (
-    <section id="achievements" className="py-20 bg-white">
+    <section id="achievements" className="bg-white mb-4">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+        <div className="text-center">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Achievements</h2>
           <p className="text-xl text-gray-600">
             Recognition and awards that reflect our commitment to excellence
