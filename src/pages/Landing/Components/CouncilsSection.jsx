@@ -1,6 +1,7 @@
 import React from 'react';
 import SpotlightCard from '../../../components/reactcom/SpotlightCard';
 import { Plus } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export const CouncilsSection = ({ councils }) => {
   // Show only the first 5 councils, or adjust as needed
@@ -22,21 +23,30 @@ export const CouncilsSection = ({ councils }) => {
         
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {visibleCouncils.map((council, index) => (
-            <SpotlightCard 
+            <Link
               key={index}
-              className="cursor-pointer text-left w-full focus:outline-none border border-gray-300 hover:bg-gray-50 transition-colors duration-200"
-              spotlightColor="rgba(0, 200, 255, 0.2)"
+              to={`/councils/${council.id}`}
+              style={{ textDecoration: 'none' }}
             >
-              <div className="flex justify-center mb-4">
-                <img src={council.image} alt={council.name + ' logo'} className="h-16 w-16 object-contain rounded-lg" />
-              </div>
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-green-600 transition-colors duration-200 text-center">
-                  {council.name}
-                </h3>
-                {/* <p className="text-gray-600">{council.description}</p> */}
-              </div>
-            </SpotlightCard>
+              <SpotlightCard 
+                className="cursor-pointer text-left w-full min-h-[200px] h-[200px] focus:outline-none border border-gray-300 hover:bg-gray-50 transition-colors duration-200"
+                spotlightColor="rgba(0, 200, 255, 0.2)"
+              >
+                <div className="flex justify-center mb-4">
+                  {typeof council.image === 'function' ? (
+                    React.createElement(council.image, { className: 'h-16 w-16 object-contain rounded-lg text-blue-600' })
+                  ) : (
+                    <img src={council.image} alt={council.name + ' logo'} className="h-16 w-16 object-contain rounded-lg" />
+                  )}
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-green-600 transition-colors duration-200 text-center">
+                    {council.name}
+                  </h3>
+                  {/* <p className="text-gray-600">{council.description}</p> */}
+                </div>
+              </SpotlightCard>
+            </Link>
           ))}
           {/* + More Card */}
           <div

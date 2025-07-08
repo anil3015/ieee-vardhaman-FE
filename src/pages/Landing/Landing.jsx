@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Header } from './Components/Header';
 import { HeroSection } from './Components/HeroSection';
 import { VisionMission } from './Components/VisionMission';
@@ -12,10 +13,13 @@ import { GallerySection } from './Components/GallerySection';
 import { FAQsSection } from './Components/FAQsSection';
 import { ContactUs } from '../../components/Essentials/ContactUs';
 import { Footer } from '../../components/Essentials/Footer';
-import { heroImages, societies, councils, pastEvents, upcomingEvents, achievements } from './data/content';
+import { heroImages, pastEvents, upcomingEvents, achievements } from './data/content';
+import { societiesData } from './data/societiesData';
+import { councilsData } from './data/councilsData';
 
 function App() {
   const [activeSection, setActiveSection] = useState('Home');
+  const navigate = useNavigate();
   const sectionIds = [
     { name: 'Home', id: 'hero' },
     { name: 'About', id: 'about' },
@@ -63,44 +67,44 @@ function App() {
       name: 'Societies', 
       action: () => scrollToSection('societies'),
       dropdown: [
-        { name: 'All Societies', action: () => window.location.href = '/societies' },
-        ...societies.map(s => ({ name: s.name, action: () => scrollToSection('societies') }))
+        { name: 'All Societies', action: () => navigate('/societies') },
+        ...societiesData.map(s => ({ name: s.name, action: () => navigate(`/societies/${s.id}`) }))
       ]
     },
     { 
       name: 'Councils', 
       action: () => scrollToSection('councils'),
       dropdown: [
-        { name: 'All Councils', action: () => window.location.href = '/councils' },
-        ...councils.map(c => ({ name: c.name, action: () => scrollToSection('councils') }))
+        { name: 'All Councils', action: () => navigate('/councils') },
+        ...councilsData.map(c => ({ name: c.name, action: () => navigate(`/councils/${c.id}`) }))
       ]
     },
     { 
       name: 'Events', 
       action: () => scrollToSection('events'),
       dropdown: [
-        { name: 'Past Events', action: () => window.location.href = '/past-events' },
-        { name: 'Upcoming Events', action: () => window.location.href = '/upcoming-events' }
+        { name: 'Past Events', action: () => navigate('/past-events') },
+        { name: 'Upcoming Events', action: () => navigate('/upcoming-events') }
       ]
     },
     { 
       name: 'Achievements', 
       action: () => scrollToSection('achievements'),
       dropdown: [
-        { name: 'All Achievements', action: () => window.location.href = '/achievements' }
+        { name: 'All Achievements', action: () => navigate('/achievements') }
       ]
     },
     { 
       name: 'Gallery',
       action: () => scrollToSection('gallery'),
       dropdown: [
-        { name: 'View Full Gallery', action: () => window.location.href = '/gallery' }
+        { name: 'View Full Gallery', action: () => navigate('/gallery') }
       ]
     },
     { name: 'FAQs', action: () => scrollToSection('faqs') },
     { name: 'Contact', action: () => scrollToSection('contact') },
-    { name: 'Journey', action: () => window.location.href = '/journey' },
-    { name: 'Newsletters', action: () => window.location.href = '/newsletters' }
+    { name: 'Journey', action: () => navigate('/journey') },
+    { name: 'Newsletters', action: () => navigate('/newsletters') }
   ];
 
   return (
@@ -109,8 +113,8 @@ function App() {
       <HeroSection heroImages={heroImages} onScrollToSection={scrollToSection} />
       <VisionMission />
       <Stats />
-      <SocietiesSection societies={societies} />
-      <CouncilsSection councils={councils} />
+      <SocietiesSection societies={societiesData} />
+      <CouncilsSection councils={councilsData} />
       <EventsSection pastEvents={pastEvents} upcomingEvents={upcomingEvents} />
       <AchievementsSection achievements={achievements} />
       <PartnersSection />

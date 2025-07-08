@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown, ChevronRight, Bell } from 'lucide-react';
 import { notifications } from '../../pages/Landing/data/notifications';
+import { societies, councils } from '../../pages/Landing/data/content';
 
 export function Header() {
   const navigate = useNavigate();
@@ -13,20 +14,26 @@ export function Header() {
 
   const navigationItems = [
     { name: 'Home', path: '/' },
-    {
-      name: 'Societies',
+    { 
+      name: 'Societies', 
+      path: '/societies',
       dropdown: [
         { name: 'All Societies', path: '/societies' },
-        { name: 'Computer Society', path: '/societies/computer' },
-        { name: 'Power & Energy Society', path: '/societies/power' },
+        ...societies.map(s => ({ 
+          name: s.name, 
+          path: `/societies/${s.name.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9\-]/g, '').toLowerCase()}` 
+        }))
       ]
     },
-    {
-      name: 'Councils',
+    { 
+      name: 'Councils', 
+      path: '/councils',
       dropdown: [
         { name: 'All Councils', path: '/councils' },
-        { name: 'Student Activities', path: '/councils/student-activities' },
-        { name: 'Women in Engineering', path: '/councils/wie' },
+        ...councils.map(c => ({ 
+          name: c.name, 
+          path: `/councils/${c.name.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9\-]/g, '').toLowerCase()}` 
+        }))
       ]
     },
     {
@@ -48,8 +55,10 @@ export function Header() {
         { name: 'View Full Gallery', path: '/gallery' },
       ]
     },
-    { name: 'Newsletters', path: '/newsletters' },
+    { name: 'FAQs', path: '/#faqs' },
+    { name: 'Contact', path: '/#contact' },
     { name: 'Journey', path: '/journey' },
+    { name: 'Newsletters', path: '/newsletters' }
   ];
 
   // Determine which nav item should be active based on the current path
@@ -167,7 +176,7 @@ export function Header() {
                   {item.dropdown && <ChevronDown className="w-4 h-4" />}
                 </button>
                 {item.dropdown && (
-                  <div className="absolute top-full left-0 mt-1 w-56 bg-white rounded-md shadow-lg border border-gray-200 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 ease-in-out z-50">
+                  <div className={`absolute top-full left-0 mt-1 w-56 bg-white rounded-md shadow-lg border border-gray-200 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 ease-in-out z-50 ${item.name === 'Societies' ? 'max-h-64 overflow-y-auto' : ''}`}>
                     {item.dropdown.map((dropdownItem, dropdownIndex) => (
                       <button
                         key={dropdownIndex}
@@ -213,10 +222,11 @@ export function Header() {
                   {notifications.map((notification) => (
                     <div
                       key={notification.id}
-                      className={`px-4 py-3 hover:bg-gray-50 cursor-pointer border-l-4 transition-colors duration-200 ${notification.unread
-                          ? 'border-l-blue-500 bg-blue-50'
+                      className={`px-4 py-3 hover:bg-gray-50 cursor-pointer border-l-4 transition-colors duration-200 ${
+                        notification.unread 
+                          ? 'border-l-blue-500 bg-blue-50' 
                           : 'border-l-transparent'
-                        }`}
+                      }`}
                     >
                       <div className="flex items-start space-x-3">
                         <span className="text-lg flex-shrink-0 mt-0.5">
@@ -224,8 +234,9 @@ export function Header() {
                         </span>
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center justify-between">
-                            <p className={`text-sm font-medium ${notification.unread ? 'text-gray-900' : 'text-gray-700'
-                              }`}>
+                            <p className={`text-sm font-medium ${
+                              notification.unread ? 'text-gray-900' : 'text-gray-700'
+                            }`}>
                               {notification.title}
                             </p>
                             {notification.unread && (
@@ -244,7 +255,7 @@ export function Header() {
                   ))}
                 </div>
                 <div className="px-4 py-3 border-t border-gray-100">
-                  <button
+                  <button 
                     className="w-full text-center text-sm text-blue-600 hover:text-blue-700 font-medium transition-colors duration-200"
                     onClick={() => {
                       setNotificationsOpen(false);
@@ -257,7 +268,8 @@ export function Header() {
               </div>
             )}
           </div>
-          {/* Mobile Menu Button */}
+
+          {/* Mobile/Tablet Menu Button */}
           <div className="mobile-menu-container xl:hidden">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -273,7 +285,8 @@ export function Header() {
           </div>
         </div>
       </div>
-      {/* Mobile Menu Panel */}
+
+      {/* Floating Mobile/Tablet Menu Panel */}
       {mobileMenuOpen && (
         <div className="xl:hidden fixed top-16 left-0 right-0 bottom-0 bg-black bg-opacity-50 z-40">
           <div className="mobile-menu-panel absolute top-0 right-0 w-80 h-full bg-white shadow-2xl transform transition-transform duration-300 ease-in-out">
@@ -286,6 +299,7 @@ export function Header() {
                   </div>
                 </div>
               </div>
+              
               {/* Scrollable Menu Content */}
               <div className="flex-1 overflow-y-auto bg-gray-50">
                 <nav className="py-4">
@@ -293,22 +307,25 @@ export function Header() {
                     <div key={index} className="mb-1">
                       <button
                         onClick={() => handleNavigationClick(item, index)}
-                        className={`w-full text-left px-6 py-4 text-gray-700 hover:text-green-700 hover:bg-green-50 transition-all duration-200 flex items-center justify-between group ${openDropdowns[index] ? 'bg-green-50 text-green-700' : ''
-                          }`}
+                        className={`w-full text-left px-6 py-4 text-gray-700 hover:text-green-700 hover:bg-green-50 transition-all duration-200 flex items-center justify-between group ${
+                          openDropdowns[index] ? 'bg-green-50 text-green-700' : ''
+                        }`}
                       >
-                        <span className={`font-medium ${openDropdowns[index] ? 'text-green-700' : 'text-gray-800'
-                          } group-hover:text-green-700`}>
+                        <span className={`font-medium ${
+                          openDropdowns[index] || activeSection === item.name ? 'text-green-700 font-bold underline underline-offset-4' : 'text-gray-800'
+                        } group-hover:text-green-700`}>
                           {item.name}
                         </span>
                         {item.dropdown && (
-                          <ChevronRight
-                            className={`w-4 h-4 transition-transform duration-200 ${openDropdowns[index] ? 'rotate-90 text-green-600' : 'text-gray-400'
-                              }`}
+                          <ChevronRight 
+                            className={`w-4 h-4 transition-transform duration-200 ${
+                              openDropdowns[index] ? 'rotate-90 text-green-600' : 'text-gray-400'
+                            }`} 
                           />
                         )}
                       </button>
                       {item.dropdown && openDropdowns[index] && (
-                        <div className="bg-white border-l-4 border-green-500 ml-6 mr-2 rounded-r-lg shadow-sm">
+                        <div className={`bg-white border-l-4 border-green-500 ml-6 mr-2 rounded-r-lg shadow-sm ${item.name === 'Societies' ? 'max-h-64 overflow-y-auto' : ''}`}>
                           {item.dropdown.map((dropdownItem, dropdownIndex) => (
                             <button
                               key={dropdownIndex}
@@ -324,10 +341,14 @@ export function Header() {
                   ))}
                 </nav>
               </div>
+              
               {/* Menu Footer */}
               <div className="px-6 py-4 bg-white border-t border-gray-200">
                 <button
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    setOpenDropdowns({});
+                  }}
                   className="w-full px-4 py-3 text-sm text-gray-600 hover:text-green-700 hover:bg-green-50 rounded-lg transition-colors duration-200 font-medium"
                 >
                   Close Menu

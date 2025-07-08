@@ -1,6 +1,7 @@
 import React from 'react';
 import SpotlightCard from '../../../components/reactcom/SpotlightCard';
 import { Plus } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export const SocietiesSection = ({ societies }) => {
   // Show only the first 5 societies
@@ -14,7 +15,7 @@ export const SocietiesSection = ({ societies }) => {
     <section id="societies" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">I Societies</h2>
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">IEEE Societies</h2>
           <p className="text-xl text-gray-600">
             Specialized technical communities driving innovation in their respective fields
           </p>
@@ -22,19 +23,28 @@ export const SocietiesSection = ({ societies }) => {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {visibleSocieties.map((society, index) => (
-            <SpotlightCard
+            <Link
               key={index}
-              className="cursor-pointer text-left w-full focus:outline-none border border-gray-300 hover:bg-gray-50 transition-colors duration-200"
-              spotlightColor="rgba(0, 200, 255, 0.2)" // Adjust as needed
+              to={`/societies/${society.id}`}
+              style={{ textDecoration: 'none' }}
             >
-              <div className="flex justify-center mb-4">
-                <img src={society.image} alt={society.name + ' logo'} className="h-16 w-16 object-contain rounded-lg" />
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-green-600 transition-colors duration-200 text-center">
-                {society.name}
-              </h3>
-              {/* <p className="text-gray-600 mb-0">{society.description}</p> */}
-            </SpotlightCard>
+              <SpotlightCard
+                id={`society-${society.name.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9\-]/g, '')}`}
+                className="cursor-pointer text-left w-full focus:outline-none border border-gray-300 hover:bg-gray-50 transition-colors duration-200"
+                spotlightColor="rgba(0, 200, 255, 0.2)"
+              >
+                <div className="flex justify-center mb-4">
+                  {typeof society.image === 'function' ? (
+                    React.createElement(society.image, { className: 'h-16 w-16 object-contain rounded-lg text-blue-600' })
+                  ) : (
+                    <img src={society.image} alt={society.name + ' logo'} className="h-16 w-16 object-contain rounded-lg" />
+                  )}
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-green-600 transition-colors duration-200 text-center">
+                  {society.name}
+                </h3>
+              </SpotlightCard>
+            </Link>
           ))}
           {/* + More Card */}
           <div

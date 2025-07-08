@@ -21,20 +21,104 @@ export const slides: Slide[] = [
   }
 ];
 
+// Societies with custom image URLs - you can easily add/change these
 export const societies: Society[] = [
-  { name: "Computer Society", /* description: "Advancing computing technology", */ image: "https://cdn-icons-png.flaticon.com/512/2721/2721297.png" },
-  { name: "Power & Energy Society", /* description: "Sustainable energy solutions", */ image: "https://cdn-icons-png.flaticon.com/512/1046/1046857.png" },
-  { name: "Signal Processing Society", /* description: "Signal & image processing", */ image: "https://cdn-icons-png.flaticon.com/512/2921/2921222.png" },
-  { name: "Communications Society", /* description: "Communication technologies", */ image: "https://cdn-icons-png.flaticon.com/512/3062/3062634.png" },
-  { name: "Robotics & Automation", /* description: "Robotics and intelligent systems", */ image: "https://cdn-icons-png.flaticon.com/512/4712/4712035.png" },
-  { name: "Aerospace & Electronic Systems", /* description: "Aerospace technologies", */ image: "https://cdn-icons-png.flaticon.com/512/1995/1995507.png" }
+  { 
+    name: "IEEE Circuits and Systems Society", 
+    image: "https://cdn-icons-png.flaticon.com/512/2721/2721297.png" // Computer chip icon
+  },
+  { 
+    name: "IEEE Signal Processing Society", 
+    image: "https://cdn-icons-png.flaticon.com/512/2921/2921222.png" // Signal wave icon
+  },
+  { 
+    name: "IEEE Communication Society", 
+    image: "https://cdn-icons-png.flaticon.com/512/3062/3062634.png" // Communication icon
+  },
+  { 
+    name: "IEEE Microwave Theory and Technology Society", 
+    image: "https://cdn-icons-png.flaticon.com/512/1046/1046857.png" // Microwave/energy icon
+  },
+  { 
+    name: "IEEE Antennas and Propagation Society", 
+    image: "https://cdn-icons-png.flaticon.com/512/1995/1995507.png" // Antenna icon
+  },
+  { 
+    name: "IEEE Systems, Man, and Cybernetics Society", 
+    image: "https://cdn-icons-png.flaticon.com/512/4712/4712035.png" // System/network icon
+  },
+  { 
+    name: "IEEE Computer Society", 
+    image: "https://cdn-icons-png.flaticon.com/512/2721/2721297.png" // Computer icon
+  },
+  { 
+    name: "IEEE Engineering in Medicine and Biology Society", 
+    image: "https://cdn-icons-png.flaticon.com/512/2965/2965380.png" // Medical icon
+  },
+  { 
+    name: "IEEE Information Theory Society", 
+    image: "https://cdn-icons-png.flaticon.com/512/2921/2921222.png" // Information icon
+  },
+  { 
+    name: "IEEE Computational Intelligence Society", 
+    image: "https://cdn-icons-png.flaticon.com/512/4712/4712035.png" // AI/Brain icon
+  },
+  { 
+    name: "IEEE Sensors Council", 
+    image: "https://cdn-icons-png.flaticon.com/512/3135/3135755.png" // Sensor icon
+  },
+  { 
+    name: "IEEE Biometrics Council", 
+    image: "https://cdn-icons-png.flaticon.com/512/2965/2965380.png" // Biometric icon
+  },
+  { 
+    name: "IEEE Photonics Society", 
+    image: "https://cdn-icons-png.flaticon.com/512/905/905690.png" // Light/Photon icon
+  },
+  { 
+    name: "IEEE Industrial Electronics Society", 
+    image: "https://cdn-icons-png.flaticon.com/512/1046/1046857.png" // Industrial icon
+  },
+  { 
+    name: "IEEE Power & Energy Society", 
+    image: "https://cdn-icons-png.flaticon.com/512/1046/1046857.png" // Power icon
+  },
+  { 
+    name: "IEEE Power Electronics Society", 
+    image: "https://cdn-icons-png.flaticon.com/512/1046/1046857.png" // Electronics icon
+  },
+  { 
+    name: "IEEE Geoscience and Remote Sensing Society", 
+    image: "https://cdn-icons-png.flaticon.com/512/1995/1995507.png" // Satellite icon
+  },
+  { 
+    name: "IEEE Robotics and Automation Society", 
+    image: "https://cdn-icons-png.flaticon.com/512/4712/4712035.png" // Robot icon
+  },
 ];
 
+// Councils with custom image URLs - you can easily add/change these
 export const councils: Council[] = [
-  { name: "Student Activities Committee", /* description: "Organizing student events and activities", */ image: "https://cdn-icons-png.flaticon.com/512/2965/2965416.png" },
-  { name: "Women in Engineering", /* description: "Promoting gender diversity in engineering", */ image: "https://cdn-icons-png.flaticon.com/512/2965/2965380.png" },
-  { name: "Young Professionals", /* description: "Career development for recent graduates", */ image: "https://cdn-icons-png.flaticon.com/512/2965/2965391.png" },
-  { name: "Technical Activities", /* description: "Coordinating technical programs", */ image: "https://cdn-icons-png.flaticon.com/512/2965/2965403.png" }
+  { 
+    name: "IEEE Council on Electronic Design Automation", 
+    image: "https://cdn-icons-png.flaticon.com/512/2721/2721297.png" // EDA icon
+  },
+  { 
+    name: "IEEE Council on RFID", 
+    image: "https://cdn-icons-png.flaticon.com/512/3135/3135755.png" // RFID icon
+  },
+  { 
+    name: "IEEE Systems Council", 
+    image: "https://cdn-icons-png.flaticon.com/512/4712/4712035.png" // Systems icon
+  },
+  { 
+    name: "IEEE Council on Superconductivity", 
+    image: "https://cdn-icons-png.flaticon.com/512/1046/1046857.png" // Superconductivity icon
+  },
+  { 
+    name: "IEEE Nanotechnology Council", 
+    image: "https://cdn-icons-png.flaticon.com/512/2721/2721297.png" // Nano icon
+  },
 ];
 
 export const pastEvents: PastEvent[] = [

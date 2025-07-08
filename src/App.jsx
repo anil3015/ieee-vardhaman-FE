@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Landing from './pages/Landing/Landing';
 import Societies from './pages/Societies/Societies';
 import Councils from './pages/Councils/Councils';
+import SocietyDetail from './pages/Societies/SocietyDetail';
+import CouncilDetail from './pages/Councils/CouncilDetail';
 import Achievements from './pages/Achievements/Achievements';
 import Gallery from './pages/Gallery/Gallery';
 import PastEvents from './pages/PastEvents/PastEvents';
@@ -19,7 +21,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/societies" element={<Societies />} />
+        <Route path="/societies/:societyId" element={<SocietyDetail />} />
         <Route path="/councils" element={<Councils />} />
+        <Route path="/councils/:councilId" element={<CouncilDetail />} />
         <Route path="/achievements" element={<Achievements />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/past-events" element={<PastEvents />} />
