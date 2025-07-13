@@ -55,8 +55,7 @@ export function Header() {
         { name: 'View Full Gallery', path: '/gallery' },
       ]
     },
-    { name: 'FAQs', path: '/#faqs' },
-    { name: 'Contact', path: '/#contact' },
+    { name: 'Contact', path: '/contact' },
     { name: 'Journey', path: '/journey' },
     { name: 'Newsletters', path: '/newsletters' }
   ];
@@ -72,6 +71,7 @@ export function Header() {
   else if (pathname.startsWith('/gallery')) activeSection = 'Gallery';
   else if (pathname.startsWith('/newsletters')) activeSection = 'Newsletters';
   else if (pathname.startsWith('/journey')) activeSection = 'Journey';
+  else if (pathname.startsWith('/contact')) activeSection = 'Contact';
   else if (pathname === '/notifications') {
     notificationsActive = true;
     activeSection = '';

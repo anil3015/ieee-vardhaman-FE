@@ -1,6 +1,5 @@
 import React from 'react';
 import { Header } from '../../components/Essentials/Header';
-import { ContactUs } from '../../components/Essentials/ContactUs';
 import { Footer } from '../../components/Essentials/Footer';
 import { societiesData } from '../Landing/data/societiesData';
 import { Link } from 'react-router-dom';

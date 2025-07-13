@@ -15,6 +15,9 @@ import Notifications from './components/Essentials/Journey';
 import Newsletter from './components/Essentials/Newsletter';
 import Team from './components/Essentials/Team';
 
+
+import Contact from './components/Essentials/Contact';
+
 function App() {
   return (
     <Router>
@@ -32,6 +35,7 @@ function App() {
         <Route path="/notifications" element={<Notifications />} />
         <Route path="/newsletters" element={<Newsletter />} />
         <Route path="/team" element={<Team />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
     </Router>
   );
