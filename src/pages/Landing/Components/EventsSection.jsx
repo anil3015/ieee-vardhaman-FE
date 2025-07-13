@@ -37,7 +37,7 @@ export const EventsSection = ({ pastEvents, upcomingEvents }) => {
   );
 
   const EventCard = ({ event, isUpcoming = false }) => (
-    <div className="bg-white rounded-xl overflow-hidden border border-gray-300 transition-colors duration-300 group flex flex-col hover:bg-gray-50 mx-2 my-2 sm:my-0 w-full min-w-[260px] max-w-[350px]">
+    <div className="bg-white rounded-xl overflow-hidden border border-gray-300 transition-colors duration-300 group flex flex-col hover:bg-gray-50 my-2 sm:my-0 w-full min-w-[260px] max-w-[350px]">
       <div className="relative overflow-hidden">
         <img
           src={event.image}

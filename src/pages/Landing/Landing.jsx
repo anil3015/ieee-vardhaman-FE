@@ -10,6 +10,7 @@ import { EventsSection } from './Components/EventsSection';
 import { AchievementsSection } from './Components/AchievementsSection';
 import { PartnersSection } from './Components/PartnersSection';
 import { GallerySection } from './Components/GallerySection';
+import SBSlate from './Components/SBSlate';
 import { FAQsSection } from './Components/FAQsSection';
 import { ContactUs } from '../../components/Essentials/ContactUs';
 import { Footer } from '../../components/Essentials/Footer';
@@ -119,6 +120,7 @@ function App() {
       <AchievementsSection achievements={achievements} />
       <PartnersSection />
       <GallerySection />
+      <SBSlate />
       <FAQsSection />
       <ContactUs />
       <Footer />

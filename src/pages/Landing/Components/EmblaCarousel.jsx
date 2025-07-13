@@ -1,22 +1,69 @@
 // EmblaCarousel.jsx
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-const EmblaCarousel = ({ items = [], renderItem }) => {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: 'start' });
+const EmblaCarousel = ({ items = [], renderItem, autoPlay = true, autoPlaySpeed = 3000 }) => {
+  const [emblaRef, emblaApi] = useEmblaCarousel({ 
+    loop: true, 
+    align: 'start',
+    skipSnaps: false,
+    dragFree: false,
+    containScroll: 'trimSnaps'
+  });
+
+  const [isHovered, setIsHovered] = useState(false);
+  const [autoPlayInterval, setAutoPlayInterval] = useState(null);
 
   const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
   const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
 
+  // Auto-scroll functionality
+  useEffect(() => {
+    if (!autoPlay || !emblaApi || isHovered) return;
+
+    const interval = setInterval(() => {
+      emblaApi.scrollNext();
+    }, autoPlaySpeed);
+
+    setAutoPlayInterval(interval);
+
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [emblaApi, autoPlay, autoPlaySpeed, isHovered]);
+
+  // Cleanup interval on unmount
+  useEffect(() => {
+    return () => {
+      if (autoPlayInterval) clearInterval(autoPlayInterval);
+    };
+  }, [autoPlayInterval]);
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+    if (autoPlayInterval) {
+      clearInterval(autoPlayInterval);
+      setAutoPlayInterval(null);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
+
   return (
-    <div className="relative">
+    <div 
+      className="relative"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex">
           {items.map((item, index) => (
             <div
               key={index}
-              className="min-w-[280px] max-w-[350px] w-full pr-4 flex-shrink-0"
+              className="min-w-[280px] max-w-[350px] w-full pr-6 flex-shrink-0"
             >
               {renderItem(item)}
             </div>
