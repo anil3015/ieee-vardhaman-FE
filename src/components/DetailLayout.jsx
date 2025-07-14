@@ -162,19 +162,56 @@ export default function DetailLayout({ data = {} }) {
       )}
 
       {/* Content */}
-      <div className="max-w-5xl mx-auto px-4 py-12 space-y-12">
+      <div className="max-w-full mx-auto px-4 py-12 space-y-12">
 
-        {/* Vision & Mission */}
-        <div className="grid md:grid-cols-2 gap-8">
-          <div className="border rounded-lg p-6 text-center">
-            <h2 className="text-2xl font-bold mb-4">Vision</h2>
-            <p className="text-gray-700">{combinedData.vision}</p>
+        <section className="py-12 px-4 max-w-6xl mx-auto">
+          {/* Heading */}
+          <div className="mb-12">
+            <h2 className="text-4xl font-extrabold text-gray-900 mb-2">
+              Our Mission & Vision
+            </h2>
+            <div className="w-16 h-1 bg-green-400 mb-1"></div>
+            <div className="w-8 h-1 bg-blue-800"></div>
           </div>
-          <div className="border rounded-lg p-6 text-center">
-            <h2 className="text-2xl font-bold mb-4">Mission</h2>
-            <p className="text-gray-700">{combinedData.mission}</p>
+
+          {/* Mission Block */}
+          <div className="flex flex-col md:flex-row items-center justify-center mb-12">
+            {/* Circle Image */}
+            <div className="w-40 h-40 rounded-full bg-gray-300 flex items-center justify-center overflow-hidden">
+              <img
+                src="https://res.cloudinary.com/doyh3fqr5/image/upload/v1752465883/images_xchgfe.jpg" // replace with your mission image
+                alt="Mission"
+                className="object-cover w-full h-full"
+              />
+            </div>
+            {/* Text */}
+            <div className="md:ml-8 mt-6 md:mt-0 max-w-lg bg-gray-100 rounded-lg shadow p-6">
+              <h3 className="text-2xl font-bold mb-2">Mission</h3>
+              <p className="text-gray-700">
+                {combinedData.mission}
+              </p>
+            </div>
           </div>
-        </div>
+
+          {/* Vision Block */}
+          <div className="flex flex-col md:flex-row-reverse items-center justify-center">
+            {/* Circle Image */}
+            <div className="w-40 h-40 rounded-full bg-gray-300 flex items-center justify-center overflow-hidden">
+              <img
+                src="https://res.cloudinary.com/doyh3fqr5/image/upload/v1752465917/images_anholb.jpg" // replace with your vision image
+                alt="Vision"
+                className="object-cover w-full h-full"
+              />
+            </div>
+            {/* Text */}
+            <div className="md:mr-8 mt-6 md:mt-0 max-w-lg bg-gray-100 rounded-lg shadow p-6">
+              <h3 className="text-2xl font-bold mb-2">Vision</h3>
+              <p className="text-gray-700">
+                {combinedData.vision}
+              </p>
+            </div>
+          </div>
+        </section>
 
         {/* Leadership Team */}
         {combinedData.slate && combinedData.slate.length > 0 && (
@@ -224,8 +261,8 @@ export default function DetailLayout({ data = {} }) {
           </div>
         )}
 
-         {/* Achievements */}
-         {combinedData.achievements && combinedData.achievements.length > 0 && (
+        {/* Achievements */}
+        {combinedData.achievements && combinedData.achievements.length > 0 && (
           <div className="mb-12">
             <h2 className="text-3xl font-bold text-green-800 mb-6 text-center flex items-center justify-center">
               <Award className="w-8 h-8 mr-3 text-green-600" />
@@ -250,8 +287,8 @@ export default function DetailLayout({ data = {} }) {
           </div>
         )}
 
-         {/* Gallery */}
-         {combinedData.gallery && combinedData.gallery.length > 0 && (
+        {/* Gallery */}
+        {combinedData.gallery && combinedData.gallery.length > 0 && (
           <div className="mb-12">
             <h2 className="text-3xl font-bold text-green-800 mb-6 text-center flex items-center justify-center">
               <Camera className="w-8 h-8 mr-3 text-green-600" />
@@ -263,7 +300,7 @@ export default function DetailLayout({ data = {} }) {
                   <div className="aspect-square overflow-hidden">
                     <img
                       src={item.img}
-                      alt={item.caption }
+                      alt={item.caption}
                       className="w-full h-full object-cover"
                     />
                   </div>

@@ -13,7 +13,7 @@ export const Footer = () => {
     e.preventDefault();
     setIsLoading(true);
     setError('');
-    
+
     try {
       const response = await fetch(`${BACKEND_URL}/newsletter/subscribe`, {
         method: 'POST',
@@ -62,9 +62,9 @@ export const Footer = () => {
       <div className="relative w-full">
         {/* main container with more dramatic curve and enhanced green shadow */}
         <div className="rounded-t-3xl rounded-b-[200px] bg-white p-8 sm:p-10 lg:p-16 relative shadow-2xl shadow-green-200/90">
-          <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-x-8 gap-y-10 mb-12 lg:mb-4">
             {/* Column 1: Branding and Newsletter */}
-            <div className="lg:col-span-2">
+            <div className="md:col-span-2 lg:col-span-2">
               <div className="flex items-center space-x-3 mb-8">
                 <img
                   className="h-12 w-auto"
@@ -73,7 +73,7 @@ export const Footer = () => {
                 />
                 <h3 className="text-xl font-bold text-gray-900">IEEE Vardhaman</h3>
               </div>
-              
+
               <p className="text-base font-semibold leading-7 text-gray-900">Subscribe to our newsletter</p>
               <form onSubmit={handleSubmit} className="mt-2 flex flex-col gap-y-2">
                 <div className="flex gap-x-4 rounded-full border border-gray-300 p-1.5 pl-4 bg-white">
@@ -91,9 +91,8 @@ export const Footer = () => {
                   <button
                     type="submit"
                     disabled={isLoading}
-                    className={`flex-none rounded-full bg-green-500 px-3.5 py-1.5 text-sm font-semibold text-white shadow-sm transition-all duration-200 ${
-                      isLoading ? 'opacity-80 cursor-not-allowed' : 'hover:bg-green-600'
-                    } focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-500 min-w-[80px] flex items-center justify-center`}
+                    className={`flex-none rounded-full bg-green-500 px-3.5 py-1.5 text-sm font-semibold text-white shadow-sm transition-all duration-200 ${isLoading ? 'opacity-80 cursor-not-allowed' : 'hover:bg-green-600'
+                      } focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-500 min-w-[80px] flex items-center justify-center`}
                   >
                     {isLoading ? (
                       <Loader2 className="h-4 w-4 animate-spin" />
@@ -112,7 +111,7 @@ export const Footer = () => {
             </div>
 
             {/* Column 2: Quick Links */}
-            <div className="mt-2">
+            <div className="md:col-span-1 lg:col-span-1">
               <h4 className="font-semibold text-gray-900">Quick Links</h4>
               <ul className="mt-4 space-y-2 text-sm text-gray-500">
                 <li><a href="/upcoming-events" className="hover:text-gray-900">Upcoming Events</a></li>
@@ -124,7 +123,7 @@ export const Footer = () => {
             </div>
 
             {/* Column 3: Media */}
-            <div className="mt-2">
+            <div className="md:col-span-1 lg:col-span-1">
               <h4 className="font-semibold text-gray-900">Media</h4>
               <ul className="mt-4 space-y-2 text-sm text-gray-500">
                 <li><a href="/gallery" className="hover:text-gray-900">Gallery</a></li>
@@ -134,25 +133,35 @@ export const Footer = () => {
             </div>
 
             {/* Column 4: Support & Social */}
-            <div className="mt-2">
+            <div className="md:col-span-2 lg:col-span-1">
               <h4 className="font-semibold text-gray-900">Follow us at</h4>
               <ul className="mt-4 space-y-3 text-sm">
                 <li className="flex items-center gap-x-2">
-                  <div className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-100"><Twitter className="h-4 w-4 text-gray-600" /></div>
+                  <div className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-100">
+                    <Twitter className="h-4 w-4 text-gray-600" />
+                  </div>
                   <a href="#" className="text-gray-500 hover:text-gray-900">Twitter</a>
                 </li>
                 <li className="flex items-center gap-x-2">
-                  <div className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-100"><Instagram className="h-4 w-4 text-gray-600" /></div>
+                  <div className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-100">
+                    <Instagram className="h-4 w-4 text-gray-600" />
+                  </div>
                   <a href="#" className="text-gray-500 hover:text-gray-900">Instagram</a>
                 </li>
                 <li className="flex items-center gap-x-2">
-                  <div className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-100"><Linkedin className="h-4 w-4 text-gray-600" /></div>
+                  <div className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-100">
+                    <Linkedin className="h-4 w-4 text-gray-600" />
+                  </div>
                   <a href="#" className="text-gray-500 hover:text-gray-900">LinkedIn</a>
                 </li>
               </ul>
             </div>
           </div>
+          
         </div>
+        <p className="text-center text-gray-400 text-sm mt-6">
+        © 2025 All copyrights reserved by IEEE Vardhaman.
+      </p>
 
         {/* "Let's Talk" Marquee */}
         <div className="relative mt-12 h-[60px] w-full overflow-hidden mb-1">
@@ -172,6 +181,7 @@ export const Footer = () => {
           </div>
         </div>
       </div>
+      
     </div>
   );
 };
