@@ -10,6 +10,19 @@ export const AchievementsSection = ({ achievements }) => {
     }
   }, [achievements]);
 
+  // Auto-rotation effect - change image every second
+  useEffect(() => {
+    if (achievements.length <= 1) return; // Don't auto-rotate if there's only one or no achievements
+
+    const interval = setInterval(() => {
+      setCurrentFrontIndex((prevIndex) => 
+        (prevIndex + 1) % achievements.length
+      );
+    }, 2000); // 1 second interval
+
+    return () => clearInterval(interval);
+  }, [achievements.length]);
+
   const handleMoreClick = () => {
     window.location.href = '/achievements';
   };

@@ -94,69 +94,81 @@ export const EventsSection = ({ pastEvents, upcomingEvents }) => {
 
   return (
     <section id="events" className="">
-      {/* Past Events */}
-      <section id="past-events" className="py-8 sm:py-16 lg:py-20">
-        <div className="max-full mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8 sm:mb-12 lg:mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">Past Events</h2>
-            <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
-              Celebrating our successful technical events and community gatherings
-            </p>
-          </div>
+      <section id="events" className="w-full">
+  {/* Past Events */}
+  <section id="past-events" className="py-8 sm:py-16 lg:py-20 bg-white">
+    <div className="w-full px-4 sm:px-6 lg:px-8">
+      <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+        <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">
+          Past Events
+        </h2>
+        <div className="w-16 h-1 bg-green-400 mx-auto mb-1"></div>
+        <div className="w-8 h-1 bg-blue-800 mx-auto"></div>
+        <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto mt-4">
+          Celebrating our successful technical events and community gatherings
+        </p>
+      </div>
 
-          <div className="relative px-12">
-            <EmblaCarousel
-              items={pastEvents}
-              renderItem={(event) => <EventCard event={event} />}
-            />
-          </div>
+      <div className="relative px-0 sm:px-4 md:px-8">
+        <EmblaCarousel
+          items={pastEvents}
+          renderItem={(event) => <EventCard event={event} />}
+        />
+      </div>
 
-          <div className="mt-12 text-center">
-            <button
-              onClick={() => window.location.href = '/past-events'}
-              className="group relative inline-flex items-center px-8 py-3 text-base font-medium border-2 border-black rounded-full overflow-hidden transition-all duration-300 hover:border-transparent"
-            >
-              <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform translate-x-full group-hover:translate-x-0 bg-green-500"></span>
-              <span className="relative flex items-center justify-center transition-colors duration-300 group-hover:text-white">
-                Show More Events
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </span>
-            </button>
-          </div>
-        </div>
-      </section>
+      <div className="mt-12 text-center">
+        <button
+          onClick={() => window.location.href = '/past-events'}
+          className="group relative inline-flex items-center px-8 py-3 text-base font-medium border-2 border-black rounded-full overflow-hidden transition-all duration-300 hover:border-transparent"
+        >
+          <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform translate-x-full group-hover:translate-x-0 bg-green-500"></span>
+          <span className="relative flex items-center justify-center transition-colors duration-300 group-hover:text-white">
+            Show More Events
+            <ArrowRight className="ml-2 w-5 h-5" />
+          </span>
+        </button>
+      </div>
+    </div>
+  </section>
 
-      {/* Upcoming Events */}
-      <section id="upcoming-events" className="py-8 sm:py-16 lg:py-20 bg-white">
-        <div className="max-full mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8 sm:mb-12 lg:mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">Upcoming Events</h2>
-            <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
-              Join us for these exciting technical events and networking opportunities
-            </p>
-          </div>
+  {/* Upcoming Events */}
+  <section id="upcoming-events" className="py-8 sm:py-16 lg:py-20">
+    <div className="w-full px-4 sm:px-6 lg:px-8">
+      <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+        <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">
+          Upcoming Events
+        </h2>
+        <div className="w-16 h-1 bg-green-400 mx-auto mb-1"></div>
+        <div className="w-8 h-1 bg-blue-800 mx-auto"></div>
+        <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto mt-4">
+          Join us for these exciting technical events and networking opportunities
+        </p>
+      </div>
 
-          <div className="relative px-12">
-            <EmblaCarousel
-              items={upcomingEvents}
-              renderItem={(event) => <EventCard event={event} isUpcoming />}
-            />
-          </div>
+      <div className="relative px-0 sm:px-4 md:px-8">
+        <EmblaCarousel
+          items={upcomingEvents}
+          renderItem={(event) => <EventCard event={event} isUpcoming />}
+        />
+      </div>
 
-          <div className="mt-12 text-center">
-            <button
-              onClick={() => window.location.href = '/upcoming-events'}
-              className="group relative inline-flex items-center px-8 py-3 text-base font-medium border-2 border-black rounded-full overflow-hidden transition-all duration-300 hover:border-transparent"
-            >
-              <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform translate-x-full group-hover:translate-x-0 bg-blue-500"></span>
-              <span className="relative flex items-center justify-center transition-colors duration-300 group-hover:text-white">
-                Explore More Events
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </span>
-            </button>
-          </div>
-        </div>
-      </section>
+      <div className="mt-12 text-center">
+        <button
+          onClick={() => window.location.href = '/upcoming-events'}
+          className="group relative inline-flex items-center px-8 py-3 text-base font-medium border-2 border-black rounded-full overflow-hidden transition-all duration-300 hover:border-transparent"
+        >
+          <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform translate-x-full group-hover:translate-x-0 bg-blue-500"></span>
+          <span className="relative flex items-center justify-center transition-colors duration-300 group-hover:text-white">
+            Explore More Events
+            <ArrowRight className="ml-2 w-5 h-5" />
+          </span>
+        </button>
+      </div>
+    </div>
+  </section>
+</section>
+
+
     </section>
   );
 };
