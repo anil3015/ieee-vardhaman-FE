@@ -1,5 +1,37 @@
 export const societiesData = [
   {
+    id: 'hkn-society',
+    name: 'HKN Society',
+    image: 'https://cdn-icons-png.flaticon.com/512/1995/1995507.png', // Placeholder icon
+    carouselImages: [
+      'https://images.pexels.com/photos/256417/pexels-photo-256417.jpeg',
+      'https://images.pexels.com/photos/905905/pexels-photo-905905.jpeg'
+    ],
+    description: 'The HKN Society is dedicated to recognizing excellence in the IEEE fields of interest.',
+    vision: 'To foster a culture of academic and professional excellence.',
+    mission: 'To recognize and honor students and professionals who have demonstrated exceptional academic and professional accomplishments.',
+    slate: [
+      { role: 'Chair', name: 'Dr. Jane Doe', photo: 'https://randomuser.me/api/portraits/women/40.jpg' },
+      { role: 'Vice Chair', name: 'Dr. John Smith', photo: 'https://randomuser.me/api/portraits/men/41.jpg' },
+      { role: 'Advisor', name: 'Dr. Emily Brown', photo: 'https://randomuser.me/api/portraits/women/42.jpg' }
+    ],
+    achievements: [
+      { title: 'Outstanding Chapter Award', year: 2024, description: 'Recognized for outstanding chapter activities.', image: 'https://images.pexels.com/photos/1181406/pexels-photo-1181406.jpeg' }
+    ],
+    gallery: [
+      { img: 'https://images.pexels.com/photos/3401403/pexels-photo-3401403.jpeg', caption: 'Induction Ceremony' },
+      { img: 'https://images.pexels.com/photos/256490/pexels-photo-256490.jpeg', caption: 'Community Service' }
+    ],
+    events: {
+      past: [
+        { title: 'HKN Induction', date: '2023-11-15', description: 'Induction ceremony for new members.', image: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg' }
+      ],
+      upcoming: [
+        { title: 'Professional Development Workshop', date: '2024-09-20', description: 'Workshop for professional skills.', image: 'https://images.pexels.com/photos/8386434/pexels-photo-8386434.jpeg' }
+      ]
+    }
+  },
+  {
     id: 'ieee-circuits-and-systems-society',
     name: 'IEEE Circuits and Systems Society',
     image: 'https://cdn-icons-png.flaticon.com/512/2721/2721297.png',
