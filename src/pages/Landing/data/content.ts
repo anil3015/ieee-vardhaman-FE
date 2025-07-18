@@ -23,6 +23,10 @@ export const slides: Slide[] = [
 
 // Societies with custom image URLs - you can easily add/change these
 export const societies: Society[] = [
+  {
+    name: "HKN Society",
+    image: "https://cdn-icons-png.flaticon.com/512/1995/1995507.png"
+  },
   { 
     name: "IEEE Circuits and Systems Society", 
     image: "https://cdn-icons-png.flaticon.com/512/2721/2721297.png" // Computer chip icon
