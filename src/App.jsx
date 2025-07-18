@@ -26,6 +26,9 @@ function App() {
         <Route path="/societies" element={<Societies />} />
         <Route path="/societies/:societyId" element={<SocietyDetail />} />
         <Route path="/societies/:societyId/past-events" element={<PastEvents />} />
+        <Route path="/societies/:societyId/upcoming-events" element={<UpcommingEvents />} />
+        <Route path="/societies/:societyId/achievements" element={<Achievements />} />
+        <Route path="/societies/:societyId/gallery" element={<Gallery />} />
         <Route path="/councils" element={<Councils />} />
         <Route path="/councils/:councilId" element={<CouncilDetail />} />
         <Route path="/achievements" element={<Achievements />} />
