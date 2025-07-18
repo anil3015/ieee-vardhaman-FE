@@ -163,6 +163,9 @@ export default function DetailLayout({ data = {} }) {
         </section>
       )}
 
+      {/* See All Buttons */}
+      {/* REMOVE the group of buttons from the top */}
+
       {/* Content */}
       <div className="max-w-full mx-auto px-4 py-12 space-y-12">
 
@@ -321,6 +324,16 @@ export default function DetailLayout({ data = {} }) {
                     )}
                   />
                 </div>
+                <div className="mt-8 text-center">
+                  <a href={`/societies/${data.id}/past-events`}>
+                    <button className="group relative inline-flex items-center px-8 py-3 text-base font-medium border-2 border-black rounded-full overflow-hidden transition-all duration-300 hover:border-transparent">
+                      <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform translate-x-full group-hover:translate-x-0 bg-blue-500"></span>
+                      <span className="relative flex items-center justify-center transition-colors duration-300 group-hover:text-white">
+                        See All Past Events
+                      </span>
+                    </button>
+                  </a>
+                </div>
               </div>
             </section>
 
@@ -347,6 +360,16 @@ export default function DetailLayout({ data = {} }) {
                     )}
                   />
                 </div>
+                <div className="mt-8 text-center">
+                  <a href={`/societies/${data.id}/upcoming-events`}>
+                    <button className="group relative inline-flex items-center px-8 py-3 text-base font-medium border-2 border-black rounded-full overflow-hidden transition-all duration-300 hover:border-transparent">
+                      <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform translate-x-full group-hover:translate-x-0 bg-blue-500"></span>
+                      <span className="relative flex items-center justify-center transition-colors duration-300 group-hover:text-white">
+                        See All Upcoming Events
+                      </span>
+                    </button>
+                  </a>
+                </div>
               </div>
             </section>
           </>
@@ -363,6 +386,16 @@ export default function DetailLayout({ data = {} }) {
                 </p>
               </div>
               <AchievementsCarousel achievements={combinedData.achievements} />
+              <div className="mt-8 text-center">
+                <a href={`/societies/${data.id}/achievements`}>
+                  <button className="group relative inline-flex items-center px-8 py-3 text-base font-medium border-2 border-black rounded-full overflow-hidden transition-all duration-300 hover:border-transparent">
+                    <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform translate-x-full group-hover:translate-x-0 bg-blue-500"></span>
+                    <span className="relative flex items-center justify-center transition-colors duration-300 group-hover:text-white">
+                      See All Achievements
+                    </span>
+                  </button>
+                </a>
+              </div>
             </div>
           </section>
         )}
@@ -401,6 +434,16 @@ export default function DetailLayout({ data = {} }) {
                 </div>
                 {/* Bottom Light Dim Overlay */}
                 <div className="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-gray-100 to-transparent z-10 pointer-events-none" />
+              </div>
+              <div className="mt-8 text-center">
+                <a href={`/societies/${data.id}/gallery`}>
+                  <button className="group relative inline-flex items-center px-8 py-3 text-base font-medium border-2 border-black rounded-full overflow-hidden transition-all duration-300 hover:border-transparent">
+                    <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform translate-x-full group-hover:translate-x-0 bg-blue-500"></span>
+                    <span className="relative flex items-center justify-center transition-colors duration-300 group-hover:text-white">
+                      See Full Gallery
+                    </span>
+                  </button>
+                </a>
               </div>
             </div>
           </section>
