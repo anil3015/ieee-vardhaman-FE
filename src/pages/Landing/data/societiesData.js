@@ -8,8 +8,8 @@ export const societiesData = [
       'https://images.pexels.com/photos/905905/pexels-photo-905905.jpeg'
     ],
     description: 'The HKN Society is dedicated to recognizing excellence in the IEEE fields of interest.',
-    vision: 'To foster a culture of academic and professional excellence.',
-    mission: 'To recognize and honor students and professionals who have demonstrated exceptional academic and professional accomplishments.',
+    vision: 'To quest for new technologies in all relative engineering fields by creating a new professional platform for networking and exploring career opportunities.',
+    mission: 'To make the students aware about the latest technical advancements. To inculcate a sense of team work and responsibility by encouraging them to organize events.',
     slate: [
       { role: 'Chair', name: 'Dr. Jane Doe', photo: 'https://randomuser.me/api/portraits/women/40.jpg' },
       { role: 'Vice Chair', name: 'Dr. John Smith', photo: 'https://randomuser.me/api/portraits/men/41.jpg' },
